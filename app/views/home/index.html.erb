@@ -1,0 +1,17 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0s54l4ACCfRvJHfk9RXK-gpFJyBRA0ZU&sensor=false"></script>
+
+<% content_for :scripts do %>
+	<script type="text/javascript">
+		$(function() { 
+			MapUtils.configMap('general_map');
+		});
+	</script>
+<% end %>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div id="map_filters">Bucador para el mapa....... <a href="#" id="linkTest">Test</a> </div>
+		<div id="map_filters_result"></div>
+		<div id="general_map"></div>
+	</div>
+</div>
