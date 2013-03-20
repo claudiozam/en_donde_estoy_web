@@ -10,7 +10,32 @@
 
 <div class="row-fluid">
 	<div class="span12">
-		<div id="map_filters">Bucador para el mapa....... <a href="#" id="linkTest">Test</a> </div>
+<!--		<div id="map_filters">Bucador para el mapa....ccs... <a href="#" id="linkTest">Test</a> </div> -->
+		<div id="map_filters">
+			<form class="form-inline">
+				<label class="control-label" for="selectedCategoria">Categoria: </label>
+    			<select id="selectedCategoria">
+					<option>Categoria 1</option>
+					<option>Categoria 2</option>
+					<option>Categoria 3</option>
+				</select>
+				<label class="control-label" for="selectedTipo">Tipo: </label>
+    			<select id="selectedTipo">
+					<option>Tipo A</option>
+					<option>Tipo B</option>
+					<option>Tipo C</option>
+				</select>
+				<label class="control-label" for="inputTexto">Texto: </label>
+    			<input type="text" class="input-large" id="inputTexto" placeholder="Ingrese el texto deseado">
+				<label class="control-label" for="selectedKM">KM> </label>
+    			<select id="selectedKM">
+					<option>KM 10</option>
+					<option>KM 20</option>
+					<option>KM 30</option>
+				</select>
+    			<button type="submit" class="btn">Buscar</button>
+    		</form>
+		</div>
 		<div id="map_filters_result"></div>
 		<div id="general_map"></div>
 	</div>
