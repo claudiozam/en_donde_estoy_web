@@ -1,12 +1,13 @@
 EnDondeEstoy::Application.routes.draw do
-
-
   resources :home do
   end
   
-  resources :location_points do
-    collection do
-      get 'near_location_points'
+  namespace :api do
+    resources :location_points do
+      collection do
+        match 'find_near_location_points/:latitude/:longitude/:name/:category' => 'location_points#find_near_location_points', :as => 'find_near_location_points', :via => [:get]
+        match 'update_location' => 'location_points#update_location', :as => 'update_location', :via => [:put]
+      end
     end
   end
 
