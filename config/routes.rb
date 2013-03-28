@@ -3,8 +3,9 @@ EnDondeEstoy::Application.routes.draw do
   end
   
   namespace :api do
-    match 'find_near_location_points/:latitude/:longitude' => 'location_points#find_near_location_points', :as => 'find_near_location_points', :via => [:get]
-    match 'update_location' => 'location_points#update_location', :as => 'update_location', :via => [:put]
+    match '/location/find_near_location/:latitude/:longitude' => 'location#find_near_location_points', :as => 'find_near_location_points', :via => [:get]
+    match '/device/create' => 'devices#create', :as => 'create', :via => [:post]
+    match '/device/:id/update_location' => 'devices#update_location', :as => 'update_location', :via => [:put]
   end
   resources :location_points 
   # The priority is based upon order of creation:

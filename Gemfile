@@ -14,6 +14,9 @@ gem "less-rails"
 gem 'therubyracer'
 gem 'execjs'
 gem "jquery-tmpl-rails"
+gem "yard-rest"
+gem "redcarpet"
+
 
 # Gems used only for assets and not required
 # in production environments by default.

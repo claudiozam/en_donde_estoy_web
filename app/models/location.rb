@@ -1,7 +1,8 @@
 class Location < ActiveRecord::Base
   has_many :location_points
-  has_one :current_location_point, :class_name => 'LocationPoint', :foreign_key => 'current_location_point_id', :primary_key => 'id'
-	has_one :device
+	belongs_to :location_point
+	has_one :current_location_point, :class_name => 'LocationPoint', :foreign_key => 'current_location_point_id', :primary_key => 'id'
+	belongs_to :device
 	belongs_to :location_category
 	belongs_to :location_type
   attr_accessible :description

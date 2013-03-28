@@ -2,6 +2,8 @@ class LocationPoint < ActiveRecord::Base
   geocoded_by :address
 	
 	belongs_to :location
+	has_one :current_location_point, :class_name => 'LocationPoint', :foreign_key => 'current_location_point_id', :primary_key => 'id'
+
 	attr_accessible :device_id, :latitude, :longitude
 
 	validates :latitude, :presence => true, :numericality => true
