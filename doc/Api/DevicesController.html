@@ -2,28 +2,30 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
-  Documentation by YARD 0.8.5.2
+  Class: Api::DevicesController
+  
+    &mdash; Documentation by YARD 0.8.5.2
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
   hasFrames = window.top.frames.main ? true : false;
-  relpath = '';
-  framesUrl = "frames.html#!" + escape(window.location.href);
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
 </script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
 
-  <script type="text/javascript" charset="utf-8" src="js/rest_plugin.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../js/rest_plugin.js"></script>
 
 
 	<style type="text/css">
@@ -290,54 +292,169 @@
     <iframe id="search_frame"></iframe>
     
     <div id="content" style="padding-top: 12px;">
-		<div id="start">
+		<div class="service">
   <h1 class="noborder title">Documentation by YARD 0.8.5.2</h1>
-
-  
-	<h2> Some examples with curl </h2>
-
-<p>Devices: 
-<pre class="code ruby"><code class="ruby">
-curl -v -k -X POST -d &quot;name=SebasDeviceHey&amp;category_id=1&amp;type_id=1&quot; &lt;a href=&quot;http://127.0.0.1:3000/api/devices/create&quot;&gt;http://127.0.0.1:3000/api/devices/create&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;{&quot;message&quot;:&quot;Device was created successfuly.&quot;,&quot;code&quot;:&quot;600&quot;}
-</code></pre></p>
-
-<pre class="code ruby"><code class="ruby">
-curl -v -k -X PUT -d &quot;latitude=20&amp;longitude=25&quot; http://127.0.0.1:3000/api/devices/1/update_location
-
-{&quot;message&quot;:&quot;Updated sucessfully.&quot;,&quot;code&quot;:&quot;000&quot;}
-</code></pre>
-
-<p>Locations:
-<pre class="code ruby"><code class="ruby">
-curl -v -k -X GET  &lt;a href=&quot;http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all&quot;&gt;http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;{&quot;code&quot;:&quot;000&quot;,&quot;list&quot;:[[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:03&quot;,&quot;category&quot;:&quot;Comercio&quot;,&quot;device&quot;:&quot;Sebas&quot;}],[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:06&quot;,&quot;category&quot;:&quot;Instituto&quot;,&quot;device&quot;:&quot;Leroy&quot;}]]}
-</code></pre></p>
-
-<pre class="code ruby"><code class="ruby">
-curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location
-
-{&quot;location&quot;:[{&quot;created_at&quot;:&quot;2013-04-04T14:01:57Z&quot;,&quot;device_id&quot;:1,&quot;id&quot;:1,&quot;location_category_id&quot;:1,&quot;location_type_id&quot;:2,&quot;updated_at&quot;:&quot;2013-04-04T14:03:49Z&quot;}],&quot;code&quot;:&quot;000&quot;}
-</code></pre>
-
-  
-  
-  <h2>All Resources</h2>
-  <ul id="resources">
-	
-    	
-      		<li><span class='object_link'><a href="Api/DevicesController.html" title="Api::DevicesController (class)">Devices</a></span></li>
-    	
-      		<li><span class='object_link'><a href="Api/LocationsController.html" title="Api::LocationsController (class)">Locations</a></span></li>
-    	
+    <a class="back" href="../index.html" title="back to the overview">&laquo; back to overview</a>
+    <h2>Devices</h2>
     
-  </ul>
+  <div id="Services" class="method_details_list">
+    
+		<div class="method">
+			<p class="method_desc">Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria, y nombre del dispositivo.  #</p>
+			<h3 class="resource_url"><strong>/api/devices/create</strong> [POST]</h3>
 
-  <div class="clear"></div>
+			<div class="parameters">	
+				
+					<div class="required">
+						<h4>Required Parameters</h4>
+						
+							<ul>
+								<li>
+									<span class="name">name</span>
+									<span class="type">string</span>
+									<span class="text">Nombre del dispositivo.</span>
+								</li>
+							</ul>
+						
+							<ul>
+								<li>
+									<span class="name">category_id</span>
+									<span class="type">integer</span>
+									<span class="text"></span>
+								</li>
+							</ul>
+						
+							<ul>
+								<li>
+									<span class="name">type_id</span>
+									<span class="type">integer</span>
+									<span class="text"></span>
+								</li>
+							</ul>
+						
+					</div>
+				
+
+				
+			</div><!-- parameters -->
+			
+			
+				<div class="response_fields">
+					<h4>Response Fields</h4>
+					
+						<ul>
+							<li>
+								<span class="name">message</span>
+								<span class="type">string</span>
+								<span class="text">String con el resultado del metodo.</span>
+							</li>
+						</ul>
+					
+						<ul>
+							<li>
+								<span class="name">code</span>
+								<span class="type">integer</span>
+								<span class="text">Valor entero con el codigo con el que finaliza el metodo.
+<ul>
+   <li><strong>000</strong> SUCCESS </li>
+   <li><strong>600</strong> El nombre ya existe. </li>
+   <li><strong>603</strong> Parametros incorrectos. </li>
+   <li><strong>999</strong> ERROR </li>
+</ul></span>
+							</li>
+						</ul>
+					
+				</div>
+			
+			
+			
+		</div>	
+    
+		<div class="method">
+			<p class="method_desc">Actualiza la posición actual de un dispositivo.</p>
+			<h3 class="resource_url"><strong>/api/devices/:id/update_location</strong> [PUT]</h3>
+
+			<div class="parameters">	
+				
+					<div class="required">
+						<h4>Required Parameters</h4>
+						
+							<ul>
+								<li>
+									<span class="name">latitude</span>
+									<span class="type">integer</span>
+									<span class="text">Latitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url</span>
+								</li>
+							</ul>
+						
+							<ul>
+								<li>
+									<span class="name">longitud</span>
+									<span class="type">integer</span>
+									<span class="text">Longitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url</span>
+								</li>
+							</ul>
+						
+							<ul>
+								<li>
+									<span class="name">id</span>
+									<span class="type">integer</span>
+									<span class="text">ID del dispositivo al que vamos a actualizar la posicion actual. Tener en cuenta que viene por url este parametro.</span>
+								</li>
+							</ul>
+						
+					</div>
+				
+
+				
+			</div><!-- parameters -->
+			
+			
+				<div class="response_fields">
+					<h4>Response Fields</h4>
+					
+						<ul>
+							<li>
+								<span class="name">message</span>
+								<span class="type">string</span>
+								<span class="text">String con el resultado del metodo.</span>
+							</li>
+						</ul>
+					
+						<ul>
+							<li>
+								<span class="name">code</span>
+								<span class="type">integer</span>
+								<span class="text">Valor entero con el codigo con el que finaliza el metodo.
+<ul>
+   <li><strong>000</strong> SUCCESS </li>
+   <li><strong>405</strong> No se encontro el dispositivo. </li>
+   <li><strong>999</strong> ERROR </li>
+</ul></span>
+							</li>
+						</ul>
+					
+				</div>
+			
+			
+			
+		</div>	
+    
+  </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 	</div>
     

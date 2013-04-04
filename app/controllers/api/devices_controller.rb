@@ -1,9 +1,9 @@
-class Api::DeviceController < ApplicationController
+class Api::DevicesController < ApplicationController
 
 	##
   # Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria, y nombre del dispositivo.  #
   #
-  # @resource api/device/create
+  # @resource /api/devices/create
   # @action POST
   #
   # @required [string] name Nombre del dispositivo.
@@ -13,35 +13,37 @@ class Api::DeviceController < ApplicationController
   # @response_field [string] message String con el resultado del metodo.
   # @response_field [integer] code Valor entero con el codigo con el que finaliza el metodo.
   #   <ul>
-  #      <li><strong>000</strong> SUCCESS
-  #      <li><strong>600</strong> El nombre ya existe
-  #      <li><strong>603</strong> Parametros incorrectos.
-  #      <li><strong>999</strong> ERROR
+  #      <li><strong>000</strong> SUCCESS </li>
+  #      <li><strong>600</strong> El nombre ya existe. </li>
+  #      <li><strong>603</strong> Parametros incorrectos. </li>
+  #      <li><strong>999</strong> ERROR </li>
   #   </ul>
   #
   def create
     if params[:name].blank? or params[:category_id].blank? or params[:type_id].blank?
-      render json: { :code => 603, :message => "Please, check data you are sending. There is data mising." }    
+      response = { :code => "603", :message => "Please, check data you are sending. There is data mising." }    
     else
       device = Device.new :name => params[:name]    
       if device.valid?
-        Location = Location.new
+        location = Location.new
         location.location_category = LocationCategory.find(params[:category_id])
         location.location_type = LocationType.find(params[:type_id])
         location.device = device
         location.save
+        response = { :message => 'Device was created successfuly.', :code => "600" }
       else
-        render json: { :message => 'Device name has already been taken.', :code => 600 }
+        response = { :message => 'Device name has already been taken.', :code => "600" }
       end
     end  
+    render json: response
   rescue Exception => e
-    render json: { :message => 'There was an error while processing this request.', :code => 999 }
+    render json: { :message => 'There was an error while processing this request.', :code => "999" }
   end
 
   ##
   # Actualiza la posición actual de un dispositivo.
   # 
-  # @resource api/:id/update_location
+  # @resource /api/devices/:id/update_location
   # @action PUT
   #
   # @required [integer] latitude Latitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url
@@ -51,24 +53,26 @@ class Api::DeviceController < ApplicationController
   # @response_field [string] message String con el resultado del metodo.
   # @response_field [integer] code Valor entero con el codigo con el que finaliza el metodo.
   #   <ul>
-  #      <li><strong>000</strong> SUCCESS
-  #      <li><strong>405</strong> No se encontro el dispositivo
-  #      <li><strong>999</strong> ERROR
+  #      <li><strong>000</strong> SUCCESS </li>
+  #      <li><strong>405</strong> No se encontro el dispositivo. </li>
+  #      <li><strong>999</strong> ERROR </li>
   #   </ul>
   #
   def update_location
-    device = Device.find params[:device_id]
+    device = Device.find params[:id]
     location = device.location
     
     location_point = LocationPoint.new :latitude => params[:latitude], :longitude => params[:longitude]
+    location_point.location = location
+    location_point.save
     location.current_location_point = location_point
     location.save
 
-    render json: { :message => 'Updated sucessfully.', :code => 000 }
+    render json: { :message => 'Updated sucessfully.', :code => "000" }
   rescue ActiveRecord::RecordNotFound
-    render json: { :message => 'Could not find device.', :code => 405 }
+    render json: { :message => 'Could not find device.', :code => "405" }
   rescue Exception => e
-    render json: { :message => 'There was an error while trying to update this location.', :code => 999 }
+    render json: { :message => 'There was an error while trying to update this location.', :code => "999" }
   end  
 
 
