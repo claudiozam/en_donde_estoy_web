@@ -294,31 +294,32 @@
   <h1 class="noborder title">Documentation by YARD 0.8.5.2</h1>
 
   
-	<h2> Some examples with curl </h2>
+	<h2> Ejemplos de curl para devices </h2>
 
-<p>Devices: 
-<pre class="code ruby"><code class="ruby">
-curl -v -k -X POST -d &quot;name=SebasDeviceHey&amp;category_id=1&amp;type_id=1&quot; &lt;a href=&quot;http://127.0.0.1:3000/api/devices/create&quot;&gt;http://127.0.0.1:3000/api/devices/create&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;{&quot;message&quot;:&quot;Device was created successfuly.&quot;,&quot;code&quot;:&quot;600&quot;}
-</code></pre></p>
+<h4> create:  curl -v -k -X POST -d "name=SebasDeviceHey&category_id=1&type_id=1" http://127.0.0.1:3000/api/devices/create </h4>
 
 <pre class="code ruby"><code class="ruby">
-curl -v -k -X PUT -d &quot;latitude=20&amp;longitude=25&quot; http://127.0.0.1:3000/api/devices/1/update_location
+{&quot;message&quot;:&quot;Device was created successfuly.&quot;,&quot;code&quot;:&quot;600&quot;}
+</code></pre>
 
+<h4> update_location: curl -v -k -X PUT -d "latitude=20&longitude=25" http://127.0.0.1:3000/api/devices/1/update_location </h4>
+
+<pre class="code ruby"><code class="ruby">
 {&quot;message&quot;:&quot;Updated sucessfully.&quot;,&quot;code&quot;:&quot;000&quot;}
 </code></pre>
 
-<p>Locations:
-<pre class="code ruby"><code class="ruby">
-curl -v -k -X GET  &lt;a href=&quot;http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all&quot;&gt;http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all&lt;/a&gt;&lt;/p&gt;
+<h2> Ejemplos de curl para Locations </h2>
 
-&lt;p&gt;{&quot;code&quot;:&quot;000&quot;,&quot;list&quot;:[[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:03&quot;,&quot;category&quot;:&quot;Comercio&quot;,&quot;device&quot;:&quot;Sebas&quot;}],[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:06&quot;,&quot;category&quot;:&quot;Instituto&quot;,&quot;device&quot;:&quot;Leroy&quot;}]]}
-</code></pre></p>
+<h4> find_near_locations:
+curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all</h4>
 
 <pre class="code ruby"><code class="ruby">
-curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location
+{&quot;code&quot;:&quot;000&quot;,&quot;list&quot;:[[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:03&quot;,&quot;category&quot;:&quot;Comercio&quot;,&quot;device&quot;:&quot;Sebas&quot;}],[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:06&quot;,&quot;category&quot;:&quot;Instituto&quot;,&quot;device&quot;:&quot;Leroy&quot;}]]}
+</code></pre>
 
+<h4> get_location: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location</h4>
+
+<pre class="code ruby"><code class="ruby">
 {&quot;location_point&quot;:[[{&quot;latitude&quot;:20.0,&quot;longitude&quot;:25.0,&quot;created_at&quot;:&quot;2013-04-04 21:06&quot;}]],&quot;code&quot;:&quot;000&quot;}
 </code></pre>
 
@@ -342,7 +343,7 @@ curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location
 	</div>
     
     <div id="footer">
-  Generated on Thu Apr  4 14:39:21 2013 with ruby-1.9.3
+  Generated on Thu Apr  4 14:47:04 2013 with ruby-1.9.3
 </div>
 
   </body>
