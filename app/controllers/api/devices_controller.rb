@@ -1,7 +1,7 @@
 class Api::DevicesController < ApplicationController
 
 	##
-  # Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria, y nombre del dispositivo.  #
+  # Crea un dispositivo nuevo. 
   #
   # @resource /api/devices/create
   # @action POST
@@ -11,7 +11,7 @@ class Api::DevicesController < ApplicationController
   # @required [integer] type_id 
   #
   # @response_field [string] message String con el resultado del metodo.
-  # @response_field [integer] code Valor entero con el codigo con el que finaliza el metodo.
+  # @response_field [string] code numero que representa el resultado del request. 
   #   <ul>
   #      <li><strong>000</strong> SUCCESS </li>
   #      <li><strong>600</strong> El nombre ya existe. </li>
@@ -30,7 +30,7 @@ class Api::DevicesController < ApplicationController
         location.location_type = LocationType.find(params[:type_id])
         location.device = device
         location.save
-        response = { :message => 'Device was created successfuly.', :code => "600" }
+        response = { :message => 'Device was created successfuly.', :code => "000" }
       else
         response = { :message => 'Device name has already been taken.', :code => "600" }
       end
@@ -46,12 +46,12 @@ class Api::DevicesController < ApplicationController
   # @resource /api/devices/:id/update_location
   # @action PUT
   #
-  # @required [integer] latitude Latitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url
-  # @required [integer] longitud Longitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url
+  # @required [integer] latitude Nueva latitud del dispositivo.
+  # @required [integer] longitud Nueva longitud del dispositivo.
   # @required [integer] id ID del dispositivo al que vamos a actualizar la posicion actual. Tener en cuenta que viene por url este parametro. 
   #
   # @response_field [string] message String con el resultado del metodo.
-  # @response_field [integer] code Valor entero con el codigo con el que finaliza el metodo.
+  # @response_field [string] code numero que representa el resultado del request. 
   #   <ul>
   #      <li><strong>000</strong> SUCCESS </li>
   #      <li><strong>405</strong> No se encontro el dispositivo. </li>

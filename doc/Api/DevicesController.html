@@ -300,7 +300,7 @@
   <div id="Services" class="method_details_list">
     
 		<div class="method">
-			<p class="method_desc">Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria, y nombre del dispositivo.  #</p>
+			<p class="method_desc">Crea un dispositivo nuevo.</p>
 			<h3 class="resource_url"><strong>/api/devices/create</strong> [POST]</h3>
 
 			<div class="parameters">	
@@ -353,8 +353,8 @@
 						<ul>
 							<li>
 								<span class="name">code</span>
-								<span class="type">integer</span>
-								<span class="text">Valor entero con el codigo con el que finaliza el metodo.
+								<span class="type">string</span>
+								<span class="text">numero que representa el resultado del request. 
 <ul>
    <li><strong>000</strong> SUCCESS </li>
    <li><strong>600</strong> El nombre ya existe. </li>
@@ -383,7 +383,7 @@
 								<li>
 									<span class="name">latitude</span>
 									<span class="type">integer</span>
-									<span class="text">Latitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url</span>
+									<span class="text">Nueva latitud del dispositivo.</span>
 								</li>
 							</ul>
 						
@@ -391,7 +391,7 @@
 								<li>
 									<span class="name">longitud</span>
 									<span class="type">integer</span>
-									<span class="text">Longitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url</span>
+									<span class="text">Nueva longitud del dispositivo.</span>
 								</li>
 							</ul>
 						
@@ -424,8 +424,8 @@
 						<ul>
 							<li>
 								<span class="name">code</span>
-								<span class="type">integer</span>
-								<span class="text">Valor entero con el codigo con el que finaliza el metodo.
+								<span class="type">string</span>
+								<span class="text">numero que representa el resultado del request. 
 <ul>
    <li><strong>000</strong> SUCCESS </li>
    <li><strong>405</strong> No se encontro el dispositivo. </li>
@@ -459,7 +459,7 @@
 	</div>
     
     <div id="footer">
-  Generated on Thu Apr  4 14:14:21 2013 with ruby-1.9.3
+  Generated on Thu Apr  4 14:39:22 2013 with ruby-1.9.3
 </div>
 
   </body>

@@ -25,5 +25,5 @@ curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E
 <pre>
 curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location
 
-{"location":[{"created_at":"2013-04-04T14:01:57Z","device_id":1,"id":1,"location_category_id":1,"location_type_id":2,"updated_at":"2013-04-04T14:03:49Z"}],"code":"000"}
+{"location_point":[[{"latitude":20.0,"longitude":25.0,"created_at":"2013-04-04 21:06"}]],"code":"000"}
 </pre>

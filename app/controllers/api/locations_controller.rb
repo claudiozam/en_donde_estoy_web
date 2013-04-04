@@ -1,6 +1,6 @@
 class Api::LocationsController < ApplicationController
   ##
-  # Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria, y nombre del dispositivo.  #
+  # Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria del dispositivo.  #
   #
   # @resource /locations/find_near_locations/:latitude/:longitude/:category_name
   # @action GET
@@ -56,13 +56,19 @@ class Api::LocationsController < ApplicationController
   end
 
   ##
-  # Obtiene el ultimo location_point del device que se desea buscar. 
+  # Obtiene el ultimo location_point del dispositivo que se desea buscar. 
   #
   # @resource /locations/:device_name/get_location
   # @action GET
   #
   # @required [string] device_name Nombre del dispositivo buscado.
-  # @responsese_field [string] message String con el resultado del metodo.
+  # @response_field [Hash] location_point Un hash con los datos del ultimo location_point del dispositivo.
+  #   <ul>
+  #      <li><strong>latitude</strong> Valor de la longitud.
+  #      <li><strong>longitude</strong> Valor de la latitude.
+  #      <li><strong>created_at</strong> Fecha en que fue actualizada la location. El formato del mismo es "%Y-%m-%d %H:%M" (Eg: 2013-03-24 18:06:29)
+  #   </ul>
+  # @response_field [string] message String con el resultado del metodo.
   # @response_field [string] code numero que representa el resultado del request. 
   #   <ul>
   #      <li><strong>000</strong> SUCCESS </li>
@@ -73,10 +79,15 @@ class Api::LocationsController < ApplicationController
   #
   def get_location
     if params[:device_name].blank?
-      response = {:message => "Please, make sure to send the device_name to search.", :code => "601"}
+      response = { :message => "Please, make sure to send the device_name to search.", :code => "601" }
     else
-      location = Location.with_device_name params[:device_name]
-      response = { :location => location, :code => "000" }
+      location = Location.with_device_name(params[:device_name])
+      location_point = location.first.current_location_point
+      result = []
+      result << [ :latitude => location_point.latitude,
+                  :longitude => location_point.longitude,
+                  :created_at => I18n.l( location_point.created_at,:format => :long) ]
+      response = { :location_point => result, :code => "000" }
     end
     render json: response
   rescue ActiveRecord::RecordNotFound

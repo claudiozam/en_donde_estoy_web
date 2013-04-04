@@ -300,7 +300,7 @@
   <div id="Services" class="method_details_list">
     
 		<div class="method">
-			<p class="method_desc">Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria, y nombre del dispositivo.  #</p>
+			<p class="method_desc">Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria del dispositivo.  #</p>
 			<h3 class="resource_url"><strong>/locations/find_near_locations/:latitude/:longitude/:category_name</strong> [GET]</h3>
 
 			<div class="parameters">	
@@ -386,7 +386,7 @@
 		</div>	
     
 		<div class="method">
-			<p class="method_desc">Obtiene el ultimo location_point del device que se desea buscar.</p>
+			<p class="method_desc">Obtiene el ultimo location_point del dispositivo que se desea buscar.</p>
 			<h3 class="resource_url"><strong>/locations/:device_name/get_location</strong> [GET]</h3>
 
 			<div class="parameters">	
@@ -411,6 +411,27 @@
 			
 				<div class="response_fields">
 					<h4>Response Fields</h4>
+					
+						<ul>
+							<li>
+								<span class="name">location_point</span>
+								<span class="type">Hash</span>
+								<span class="text">Un hash con los datos del ultimo location_point del dispositivo.
+<ul>
+   <li><strong>latitude</strong> Valor de la longitud.
+   <li><strong>longitude</strong> Valor de la latitude.
+   <li><strong>created_at</strong> Fecha en que fue actualizada la location. El formato del mismo es "%Y-%m-%d %H:%M" (Eg: 2013-03-24 18:06:29)
+</ul></span>
+							</li>
+						</ul>
+					
+						<ul>
+							<li>
+								<span class="name">message</span>
+								<span class="type">string</span>
+								<span class="text">String con el resultado del metodo.</span>
+							</li>
+						</ul>
 					
 						<ul>
 							<li>
@@ -451,7 +472,7 @@
 	</div>
     
     <div id="footer">
-  Generated on Thu Apr  4 14:14:21 2013 with ruby-1.9.3
+  Generated on Thu Apr  4 14:39:22 2013 with ruby-1.9.3
 </div>
 
   </body>
