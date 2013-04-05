@@ -2,28 +2,30 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
-  Documentation by YARD 0.8.5.2
+  Class: Api::LocationsController
+  
+    &mdash; Documentation by YARD 0.8.5.2
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
   hasFrames = window.top.frames.main ? true : false;
-  relpath = '';
-  framesUrl = "frames.html#!" + escape(window.location.href);
+  relpath = '../';
+  framesUrl = "../frames.html#!" + escape(window.location.href);
 </script>
 
 
-  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
 
-  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
 
-  <script type="text/javascript" charset="utf-8" src="js/rest_plugin.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../js/rest_plugin.js"></script>
 
 
 	<style type="text/css">
@@ -290,55 +292,182 @@
     <iframe id="search_frame"></iframe>
     
     <div id="content" style="padding-top: 12px;">
-		<div id="start">
+		<div class="service">
   <h1 class="noborder title">Documentation by YARD 0.8.5.2</h1>
-
-  
-	<h2> Ejemplos de curl para devices </h2>
-
-<h4> create:  curl -v -k -X POST -d "name=SebasDeviceHey&category_id=1&type_id=1" http://127.0.0.1:3000/api/devices/create </h4>
-
-<pre class="code ruby"><code class="ruby">
-{&quot;message&quot;:&quot;Device was created successfuly.&quot;,&quot;code&quot;:&quot;600&quot;}
-</code></pre>
-
-<h4> update_location: curl -v -k -X PUT -d "latitude=20&longitude=25" http://127.0.0.1:3000/api/devices/1/update_location </h4>
-
-<pre class="code ruby"><code class="ruby">
-{&quot;message&quot;:&quot;Updated sucessfully.&quot;,&quot;code&quot;:&quot;000&quot;}
-</code></pre>
-
-<h2> Ejemplos de curl para Locations </h2>
-
-<h4> find_near_locations:
-curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all</h4>
-
-<pre class="code ruby"><code class="ruby">
-{&quot;code&quot;:&quot;000&quot;,&quot;list&quot;:[[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:03&quot;,&quot;category&quot;:&quot;Comercio&quot;,&quot;device&quot;:&quot;Sebas&quot;}],[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:06&quot;,&quot;category&quot;:&quot;Instituto&quot;,&quot;device&quot;:&quot;Leroy&quot;}]]}
-</code></pre>
-
-<h4> get_location: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location</h4>
-
-<pre class="code ruby"><code class="ruby">
-{&quot;location_point&quot;:[[{&quot;latitude&quot;:20.0,&quot;longitude&quot;:25.0,&quot;created_at&quot;:&quot;2013-04-04 21:06&quot;}]],&quot;code&quot;:&quot;000&quot;}
-</code></pre>
-
-  
-  
-  <h2>All Resources</h2>
-  <ul id="resources">
-	
-    	
-      		<li><span class='object_link'><a href="Api/DevicesController.html" title="Api::DevicesController (class)">Devices</a></span></li>
-    	
-      		<li><span class='object_link'><a href="Api/LocationsController.html" title="Api::LocationsController (class)">Locations</a></span></li>
-    	
+    <a class="back" href="../index.html" title="back to the overview">&laquo; back to overview</a>
+    <h2>Locations</h2>
     
-  </ul>
+  <div id="Services" class="method_details_list">
+    
+		<div class="method">
+			<p class="method_desc">Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria del dispositivo.  #</p>
+			<h3 class="resource_url"><strong>/locations/find_near_locations/:latitude/:longitude/:category_name</strong> [GET]</h3>
 
-  <div class="clear"></div>
+			<div class="parameters">	
+				
+					<div class="required">
+						<h4>Required Parameters</h4>
+						
+							<ul>
+								<li>
+									<span class="name">latitude</span>
+									<span class="type">integer</span>
+									<span class="text">Latitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url (Acordarse que en caso de que tenga coma, tenemos que scapearlas, por ejemplo: 22.5 = 22%2E5)</span>
+								</li>
+							</ul>
+						
+							<ul>
+								<li>
+									<span class="name">longitud</span>
+									<span class="type">integer</span>
+									<span class="text">Longitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url (Acordarse que en caso de que tenga coma, tenemos que scapearlas, por ejemplo: 22.5 = 22%2E5)</span>
+								</li>
+							</ul>
+						
+							<ul>
+								<li>
+									<span class="name">category_name</span>
+									<span class="type">string</span>
+									<span class="text">Nombre de la categoria a la que pertenece el dispositivo buscado. (En caso de que no se quiera filtrar por este campo se lo envia como "all"). Este valor es recibido por url.</span>
+								</li>
+							</ul>
+						
+					</div>
+				
+
+				
+			</div><!-- parameters -->
+			
+			
+				<div class="response_fields">
+					<h4>Response Fields</h4>
+					
+						<ul>
+							<li>
+								<span class="name">message</span>
+								<span class="type">string</span>
+								<span class="text">String con el resultado del metodo.</span>
+							</li>
+						</ul>
+					
+						<ul>
+							<li>
+								<span class="name">list</span>
+								<span class="type">array</span>
+								<span class="text">Array con los location_points encontrados. Dentro del array habran arrays con información de cada location encontrado.
+<ul>
+   <li><strong>latitude</strong> Valor de la latitud. Actualmente es un integer sin formato
+   <li><strong>longitude</strong> Valor de la longitud. Actualmente es un integer sin formato
+   <li><strong>updated_at</strong> Fecha de creacion del mismo. El formato del mismo es "%Y-%m-%d %H:%M" (Eg: 2013-03-24 18:06:29)
+   <li><strong>category</strong> Nombre de la categoria a la que pertenece. 
+   <li><strong>device</strong> Nombre el dispositivo.
+</ul></span>
+							</li>
+						</ul>
+					
+						<ul>
+							<li>
+								<span class="name">code</span>
+								<span class="type">string</span>
+								<span class="text">numero que representa el resultado del request. 
+<ul>
+   <li><strong>000</strong> SUCCESS </li>
+   <li><strong>600</strong> No se encontraron location points. </li>
+   <li><strong>601</strong> No se pasaron longitud o latitud en la url. </li>
+   <li><strong>999</strong> ERROR </li>
+</ul></span>
+							</li>
+						</ul>
+					
+				</div>
+			
+			
+			
+		</div>	
+    
+		<div class="method">
+			<p class="method_desc">Obtiene el ultimo location_point del dispositivo que se desea buscar.</p>
+			<h3 class="resource_url"><strong>/locations/:device_name/get_location</strong> [GET]</h3>
+
+			<div class="parameters">	
+				
+					<div class="required">
+						<h4>Required Parameters</h4>
+						
+							<ul>
+								<li>
+									<span class="name">device_name</span>
+									<span class="type">string</span>
+									<span class="text">Nombre del dispositivo buscado.</span>
+								</li>
+							</ul>
+						
+					</div>
+				
+
+				
+			</div><!-- parameters -->
+			
+			
+				<div class="response_fields">
+					<h4>Response Fields</h4>
+					
+						<ul>
+							<li>
+								<span class="name">location_point</span>
+								<span class="type">Hash</span>
+								<span class="text">Un hash con los datos del ultimo location_point del dispositivo.
+<ul>
+   <li><strong>latitude</strong> Valor de la longitud.
+   <li><strong>longitude</strong> Valor de la latitude.
+   <li><strong>created_at</strong> Fecha en que fue actualizada la location. El formato del mismo es "%Y-%m-%d %H:%M" (Eg: 2013-03-24 18:06:29)
+</ul></span>
+							</li>
+						</ul>
+					
+						<ul>
+							<li>
+								<span class="name">message</span>
+								<span class="type">string</span>
+								<span class="text">String con el resultado del metodo.</span>
+							</li>
+						</ul>
+					
+						<ul>
+							<li>
+								<span class="name">code</span>
+								<span class="type">string</span>
+								<span class="text">numero que representa el resultado del request. 
+<ul>
+   <li><strong>000</strong> SUCCESS </li>
+   <li><strong>405</strong> No se encontro el device solicitado.</li>
+   <li><strong>601</strong> No se paso nombre del device o el mismo es "blanco".</li>
+   <li><strong>999</strong> ERROR</li>
+</ul></span>
+							</li>
+						</ul>
+					
+				</div>
+			
+			
+			
+		</div>	
+    
+  </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 	</div>
     

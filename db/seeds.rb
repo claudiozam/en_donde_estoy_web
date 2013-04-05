@@ -8,8 +8,8 @@
 
 
 # Location.delete_all!
-LocationCategory.delete_all!
-LocationType.delete_all!
+# LocationCategory.delete_all!
+# LocationType.delete_all!
 # LocationPoint.delete_all!
 # Device.delete_all
 

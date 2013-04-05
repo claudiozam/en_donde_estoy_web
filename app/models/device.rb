@@ -5,5 +5,5 @@ class Device < ActiveRecord::Base
 
   validates :name, :uniqueness => true
 
-	scope :with_name, lambda{ |value| where("device.name like ?", '%'+value+'%') unless value.blank? }
+  scope :with_name, lambda{ |value| where("name like ?", value) unless value.blank? }
 end

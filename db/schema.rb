@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328191734) do
+ActiveRecord::Schema.define(:version => 20130404134900) do
 
   create_table "devices", :force => true do |t|
     t.string   "name"
@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(:version => 20130328191734) do
     t.float    "longitude"
     t.string   "address"
     t.integer  "device_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "location_id"
-    t.integer  "current_location_point_id"
+    t.integer  "current_location_id"
   end
 
   add_index "location_points", ["created_at"], :name => "index_location_points_on_created_at"
@@ -51,10 +51,9 @@ ActiveRecord::Schema.define(:version => 20130328191734) do
   create_table "locations", :force => true do |t|
     t.integer  "location_type_id"
     t.integer  "location_category_id"
-    t.integer  "current_location_point_id"
     t.integer  "device_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
 end
