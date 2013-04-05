@@ -74,7 +74,13 @@ MapUtils.setNearLocationPointsMarkers = function(currentLat, currentLng) {
 	$.getJSON('/location_points/near_location_points', { lat: currentLat, lng: currentLng }, function(points) {
 		
 		$('#map_filters_result').empty();
-		$.tmpl('templates/location_point_item', points).appendTo('#map_filters_result');
+		$.tmpl('temp_location_point_item', points).appendTo('#map_filters_result');
+		
+		//Ejemplo de template 1
+		$.tmpl('temp_ejemploplantilla1', points).appendTo('#map_filters_result');
+		//Ejemplo de template 2
+		$.tmpl('temp_ejemploplantilla2', points).appendTo('#map_filters_result');
+
 
 		$.each(points, function(i, field){
 			latLng = new google.maps.LatLng(field.latitude, field.longitude);
