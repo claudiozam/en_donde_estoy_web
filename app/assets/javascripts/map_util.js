@@ -19,7 +19,13 @@ MapUtils.configMap = function(mapId) {
 	}).resize();
 
 
-	$('#linkTest').click(function() {
+	$('#linkBuscar').click(function() {
+		
+		var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(-34.59707,-58.416501),
+            map: MapUtils.ActualMap,
+            title: 'Hello World!'
+        });
 		MapUtils.getNearLocationPoints(-34.595381, -58.423716);
 	});
 
