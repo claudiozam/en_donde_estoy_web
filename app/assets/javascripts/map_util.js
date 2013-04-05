@@ -28,23 +28,12 @@ MapUtils.configMap = function(mapId) {
 	    $('#' + mapId).css('height', (h - offsetTop));
 	}).resize();
 
-<<<<<<< HEAD
 	$('#buttonBuscar').click(function() {
 		$('#buttonOcultar').show();
 		$('#col_right').removeClass('span12')
 		$('#col_right').addClass('span10');
 		$(MapUtils.LocationPoints).insertBefore('#col_right');
-=======
-
-	$('#linkBuscar').click(function() {
-		
-		var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(-34.59707,-58.416501),
-            map: MapUtils.ActualMap,
-            title: 'Hello World!'
-        });
->>>>>>> db487f93af1704bcd4dabaab21048466215477ba
-		MapUtils.getNearLocationPoints(-34.595381, -58.423716);
+		//MapUtils.getNearLocationPoints(-34.595381, -58.423716);
 		MapUtils.setNearLocationPointsMarkers(-34.595381, -58.423716);
 	});
 
@@ -72,17 +61,21 @@ MapUtils.configMap = function(mapId) {
 	});
 };
 
-MapUtils.getNearLocationPoints = function(currentLat, currentLng) {
+/*MapUtils.getNearLocationPoints = function(currentLat, currentLng) {
 	$.getJSON('/location_points/near_location_points', { lat: currentLat, lng: currentLng }, function(points) {
 		$('#map_filters_result').empty();
 		$.tmpl('templates/location_point_item', points).appendTo('#map_filters_result');
 	});
-};
+};*/
 
 
 MapUtils.setNearLocationPointsMarkers = function(currentLat, currentLng) {
 	var latLng, marker, dataListener, MapsEventListener;
 	$.getJSON('/location_points/near_location_points', { lat: currentLat, lng: currentLng }, function(points) {
+		
+		$('#map_filters_result').empty();
+		$.tmpl('templates/location_point_item', points).appendTo('#map_filters_result');
+
 		$.each(points, function(i, field){
 			latLng = new google.maps.LatLng(field.latitude, field.longitude);
 			marker = new google.maps.Marker({
