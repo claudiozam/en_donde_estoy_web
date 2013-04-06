@@ -14,6 +14,7 @@ class Api::DevicesController < ApplicationController
   # @response_field [string] code numero que representa el resultado del request. 
   #   <ul>
   #      <li><strong>000</strong> SUCCESS </li>
+  #      <li><strong>405</strong> No se pudo encontrar la categoria o el tipo. </li>
   #      <li><strong>600</strong> El nombre ya existe. </li>
   #      <li><strong>603</strong> Parametros incorrectos. </li>
   #      <li><strong>999</strong> ERROR </li>
@@ -36,6 +37,8 @@ class Api::DevicesController < ApplicationController
       end
     end  
     render json: response
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { :message => "#{e}", :code => "405" }
   rescue Exception => e
     render json: { :message => 'There was an error while processing this request.', :code => "999" }
   end
@@ -55,25 +58,27 @@ class Api::DevicesController < ApplicationController
   #   <ul>
   #      <li><strong>000</strong> SUCCESS </li>
   #      <li><strong>405</strong> No se encontro el dispositivo. </li>
+  #      <li><strong>603</strong> Faltan parametros. </li>
   #      <li><strong>999</strong> ERROR </li>
   #   </ul>
   #
   def update_location
-    device = Device.find params[:id]
-    location = device.location
-    
-    location_point = LocationPoint.new :latitude => params[:latitude], :longitude => params[:longitude]
-    location_point.location = location
-    location_point.save
-    location.current_location_point = location_point
-    location.save
+    if params[:latitude].blank? or params[:longitude].blank?
+      render json: { :code => "603", :message => "Please, check data you are sending. There are missing params." }    
+    else
+      device = Device.find params[:id]
+      location = device.location
+      location_point = LocationPoint.new :latitude => params[:latitude], :longitude => params[:longitude]
+      location_point.location = location
+      location_point.save
+      location.current_location_point = location_point
+      location.save
 
-    render json: { :message => 'Updated sucessfully.', :code => "000" }
+      render json: { :message => 'Updated sucessfully.', :code => "000" }
+    end
   rescue ActiveRecord::RecordNotFound
     render json: { :message => 'Could not find device.', :code => "405" }
   rescue Exception => e
     render json: { :message => 'There was an error while trying to update this location.', :code => "999" }
   end  
-
-
-end
+  end

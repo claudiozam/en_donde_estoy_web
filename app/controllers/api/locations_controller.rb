@@ -5,8 +5,8 @@ class Api::LocationsController < ApplicationController
   # @resource /api/locations/find_near_locations/:latitude/:longitude/:category_name
   # @action GET
   #
-  # @required [integer] latitude Latitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url (Acordarse que en caso de que tenga coma, tenemos que scapearlas, por ejemplo: 22.5 = 22%2E5)
-  # @required [integer] longitud Longitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url (Acordarse que en caso de que tenga coma, tenemos que scapearlas, por ejemplo: 22.5 = 22%2E5)
+  # @required [integer] latitude Latitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url
+  # @required [integer] longitud Longitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url 
   # @required [string] category_name Nombre de la categoria a la que pertenece el dispositivo buscado. (En caso de que no se quiera filtrar por este campo se lo envia como "all"). Este valor es recibido por url.
   #
   # @response_field [string] message String con el resultado del metodo.

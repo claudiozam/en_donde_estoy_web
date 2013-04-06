@@ -21,10 +21,15 @@
 end
 
 # We set default location_type:
-lc = LocationType.new :name => "Supermercardo", :dinamic => false
-lc.save
 
-lc2 = LocationType.new :name => "Transporte", :dinamic => true
-lc2.save
+["Edificio","Casa"].each do |nombre|
+	lt = LocationType.new :name => nombre
+	lt.dinamic = false
+	lt.save
+end
 
-
+["transporte"].each do |nombre|
+	lt = LocationType.new :name => nombre
+	lt.dinamic = true
+	lt.save
+end
