@@ -6,6 +6,7 @@
 </pre>
 
 
+
 <h4> update_location: curl -v -k -X PUT -d "latitude=20&longitude=25" http://127.0.0.1:3000/api/devices/1/update_location </h4>
 <pre>
 {"message":"Updated sucessfully.","code":"000"}
@@ -16,14 +17,14 @@
 
 <h4> find_near_locations:
 curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all</h4>
-
+<h4> Ejemplo de URL: http://localhost:3000/api/locations/find_near_locations/20/25/all </h4>
 <pre>
 {"code":"000","list":[[{"latitude":30.5,"longitude":21.5,"updated_at":"2013-04-04 14:03","category":"Comercio","device":"Sebas"}],[{"latitude":30.5,"longitude":21.5,"updated_at":"2013-04-04 14:06","category":"Instituto","device":"Leroy"}]]}
 </pre>
 
 
 <h4> get_location: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location</h4>
-
+<h4> Ejemplo de URL: http://localhost:3000/api/locations/Sebas/get_location </h4>
 <pre>
 {"location_point":[[{"latitude":20.0,"longitude":25.0,"created_at":"2013-04-04 21:06"}]],"code":"000"}
 </pre>

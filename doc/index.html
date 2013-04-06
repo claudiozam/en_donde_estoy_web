@@ -313,11 +313,15 @@
 <h4> find_near_locations:
 curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all</h4>
 
+<h4> Ejemplo de URL: http://localhost:3000/api/locations/find_near_locations/20/25/all </h4>
+
 <pre class="code ruby"><code class="ruby">
 {&quot;code&quot;:&quot;000&quot;,&quot;list&quot;:[[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:03&quot;,&quot;category&quot;:&quot;Comercio&quot;,&quot;device&quot;:&quot;Sebas&quot;}],[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:06&quot;,&quot;category&quot;:&quot;Instituto&quot;,&quot;device&quot;:&quot;Leroy&quot;}]]}
 </code></pre>
 
 <h4> get_location: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location</h4>
+
+<h4> Ejemplo de URL: http://localhost:3000/api/locations/get_location/20/25/all </h4>
 
 <pre class="code ruby"><code class="ruby">
 {&quot;location_point&quot;:[[{&quot;latitude&quot;:20.0,&quot;longitude&quot;:25.0,&quot;created_at&quot;:&quot;2013-04-04 21:06&quot;}]],&quot;code&quot;:&quot;000&quot;}
@@ -343,7 +347,7 @@ curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E
 	</div>
     
     <div id="footer">
-  Generated on Thu Apr  4 14:47:04 2013 with ruby-1.9.3
+  Generated on Sat Apr  6 12:27:23 2013 with ruby-1.9.3
 </div>
 
   </body>

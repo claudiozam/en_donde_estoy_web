@@ -301,7 +301,7 @@
     
 		<div class="method">
 			<p class="method_desc">Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria del dispositivo.  #</p>
-			<h3 class="resource_url"><strong>/locations/find_near_locations/:latitude/:longitude/:category_name</strong> [GET]</h3>
+			<h3 class="resource_url"><strong>/api/locations/find_near_locations/:latitude/:longitude/:category_name</strong> [GET]</h3>
 
 			<div class="parameters">	
 				
@@ -387,7 +387,7 @@
     
 		<div class="method">
 			<p class="method_desc">Obtiene el ultimo location_point del dispositivo que se desea buscar.</p>
-			<h3 class="resource_url"><strong>/locations/:device_name/get_location</strong> [GET]</h3>
+			<h3 class="resource_url"><strong>/api/locations/:device_name/get_location</strong> [GET]</h3>
 
 			<div class="parameters">	
 				
@@ -453,6 +453,97 @@
 			
 		</div>	
     
+		<div class="method">
+			<p class="method_desc">Obtiene toda las categorias posibles para locations.</p>
+			<h3 class="resource_url"><strong>/api/locations/get_all_categories</strong> [GET]</h3>
+
+			<div class="parameters">	
+				
+
+				
+			</div><!-- parameters -->
+			
+			
+				<div class="response_fields">
+					<h4>Response Fields</h4>
+					
+						<ul>
+							<li>
+								<span class="name">categories</span>
+								<span class="type">array</span>
+								<span class="text">Lista de hashes con los datos de cada categoria.
+<ul>
+   <li><strong>id</strong> Id de la categoria (valor integer).
+   <li><strong>nombre</strong> Nombre de la categoria.
+   <li><strong>descripcion</strong> Descripcion de la categoria.
+</ul></span>
+							</li>
+						</ul>
+					
+						<ul>
+							<li>
+								<span class="name">code</span>
+								<span class="type">string</span>
+								<span class="text">numero que representa el resultado del request. 
+<ul>
+   <li><strong>000</strong> SUCCESS </li>
+   <li><strong>999</strong> ERROR</li>
+</ul></span>
+							</li>
+						</ul>
+					
+				</div>
+			
+			
+			
+		</div>	
+    
+		<div class="method">
+			<p class="method_desc">Obtiene todos los tipos posibles para locations.</p>
+			<h3 class="resource_url"><strong>/api/locations/get_all_types</strong> [GET]</h3>
+
+			<div class="parameters">	
+				
+
+				
+			</div><!-- parameters -->
+			
+			
+				<div class="response_fields">
+					<h4>Response Fields</h4>
+					
+						<ul>
+							<li>
+								<span class="name">tipes</span>
+								<span class="type">array</span>
+								<span class="text">Lista de hashes con los datos de cada categoria.
+<ul>
+   <li><strong>id</strong> Id del tipo de location (valor integer).
+   <li><strong>nombre</strong> Nombre del tipo de location.
+   <li><strong>dinamic</strong> Valor entero que representa si la location es dinamica. (1 = verdadero, 0 = falso)
+   <li><strong>descripcion</strong> Descripcion del tipo de location.
+</ul></span>
+							</li>
+						</ul>
+					
+						<ul>
+							<li>
+								<span class="name">code</span>
+								<span class="type">string</span>
+								<span class="text">numero que representa el resultado del request. 
+<ul>
+   <li><strong>000</strong> SUCCESS </li>
+   <li><strong>999</strong> ERROR</li>
+</ul></span>
+							</li>
+						</ul>
+					
+				</div>
+			
+			
+			
+		</div>	
+    
   </div>
 
 </div>
@@ -472,7 +563,7 @@
 	</div>
     
     <div id="footer">
-  Generated on Thu Apr  4 14:47:04 2013 with ruby-1.9.3
+  Generated on Sat Apr  6 12:27:23 2013 with ruby-1.9.3
 </div>
 
   </body>

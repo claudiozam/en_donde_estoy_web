@@ -2,7 +2,7 @@ class Api::LocationsController < ApplicationController
   ##
   # Obtiene dispositivos cercanos. El mismo permite realizar filtrado por categoria del dispositivo.  #
   #
-  # @resource /locations/find_near_locations/:latitude/:longitude/:category_name
+  # @resource /api/locations/find_near_locations/:latitude/:longitude/:category_name
   # @action GET
   #
   # @required [integer] latitude Latitud del dispositivo que solicita posiciones de dispositivos cercanas. Este valor es recibido por url (Acordarse que en caso de que tenga coma, tenemos que scapearlas, por ejemplo: 22.5 = 22%2E5)
@@ -58,7 +58,7 @@ class Api::LocationsController < ApplicationController
   ##
   # Obtiene el ultimo location_point del dispositivo que se desea buscar. 
   #
-  # @resource /locations/:device_name/get_location
+  # @resource /api/locations/:device_name/get_location
   # @action GET
   #
   # @required [string] device_name Nombre del dispositivo buscado.
@@ -96,4 +96,69 @@ class Api::LocationsController < ApplicationController
     render json: { :message => "There was an error while processing this request. #{e}", :code => "999" }
   end
 
+  ##
+  # Obtiene toda las categorias posibles para locations.
+  #
+  # @resource /api/locations/get_all_categories
+  # @action GET
+  #
+  # @response_field [array] categories Lista de hashes con los datos de cada categoria.
+  #   <ul>
+  #      <li><strong>id</strong> Id de la categoria (valor integer).
+  #      <li><strong>nombre</strong> Nombre de la categoria.
+  #      <li><strong>descripcion</strong> Descripcion de la categoria.
+  #   </ul>
+  # @response_field [string] code numero que representa el resultado del request. 
+  #   <ul>
+  #      <li><strong>000</strong> SUCCESS </li>
+  #      <li><strong>999</strong> ERROR</li>
+  #   </ul>
+  #
+  def get_all_categories
+    location_categories = LocationCategory.all
+    result = []
+    location_categories.each do |category|
+    result << [ :id => category.id,
+                :name => category.name,
+                :description => category.description ]
+    end
+    response = { :categories => result, :code => "000" }
+    render json: response
+  rescue Exception => e
+    render json: { :message => "There was an error while processing this request. #{e}", :code => "999" }
+  end
+
+  ##
+  # Obtiene todos los tipos posibles para locations.
+  #
+  # @resource /api/locations/get_all_types
+  # @action GET
+  #
+  # @response_field [array] tipes Lista de hashes con los datos de cada categoria.
+  #   <ul>
+  #      <li><strong>id</strong> Id del tipo de location (valor integer).
+  #      <li><strong>nombre</strong> Nombre del tipo de location.
+  #      <li><strong>dinamic</strong> Valor entero que representa si la location es dinamica. (1 = verdadero, 0 = falso)
+  #      <li><strong>descripcion</strong> Descripcion del tipo de location.
+  #   </ul>
+  # @response_field [string] code numero que representa el resultado del request. 
+  #   <ul>
+  #      <li><strong>000</strong> SUCCESS </li>
+  #      <li><strong>999</strong> ERROR</li>
+  #   </ul>
+  #
+  def get_all_types
+    location_types = LocationType.all
+    result = []
+    location_types.each do |type|
+    result << [ :id => type.id,
+                :name => type.name,
+                :dinamic => type.dinamic,
+                :description => type.description ]
+    end
+    response = { :tipes => result, :code => "000" }
+    render json: response
+  rescue Exception => e
+    render json: { :message => "There was an error while processing this request. #{e}", :code => "999" }
+  end
 end
