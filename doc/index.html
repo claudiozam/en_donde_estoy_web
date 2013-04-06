@@ -296,13 +296,15 @@
   
 	<h2> Ejemplos de curl para devices </h2>
 
-<h4> create:  curl -v -k -X POST -d "name=SebasDeviceHey&category_id=1&type_id=1" http://127.0.0.1:3000/api/devices/create </h4>
+<h4> create <br>
+Ejemplo de Curl: curl -v -k -X POST -d "name=SebasDeviceHey&category_id=1&type_id=1" http://127.0.0.1:3000/api/devices/create </h4>
 
 <pre class="code ruby"><code class="ruby">
 {&quot;message&quot;:&quot;Device was created successfuly.&quot;,&quot;code&quot;:&quot;600&quot;}
 </code></pre>
 
-<h4> update_location: curl -v -k -X PUT -d "latitude=20&longitude=25" http://127.0.0.1:3000/api/devices/1/update_location </h4>
+<h4> update_location <br>
+Ejemplo de Curl: curl -v -k -X PUT -d "latitude=20&longitude=25" http://127.0.0.1:3000/api/devices/1/update_location </h4>
 
 <pre class="code ruby"><code class="ruby">
 {&quot;message&quot;:&quot;Updated sucessfully.&quot;,&quot;code&quot;:&quot;000&quot;}
@@ -310,21 +312,36 @@
 
 <h2> Ejemplos de curl para Locations </h2>
 
-<h4> find_near_locations:
-curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all</h4>
-
-<h4> Ejemplo de URL: http://localhost:3000/api/locations/find_near_locations/20/25/all </h4>
+<h4> find_near_locations <br>
+Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all <br>
+Ejemplo de URL: http://localhost:3000/api/locations/find_near_locations/20/25/all </h4>
 
 <pre class="code ruby"><code class="ruby">
 {&quot;code&quot;:&quot;000&quot;,&quot;list&quot;:[[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:03&quot;,&quot;category&quot;:&quot;Comercio&quot;,&quot;device&quot;:&quot;Sebas&quot;}],[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:06&quot;,&quot;category&quot;:&quot;Instituto&quot;,&quot;device&quot;:&quot;Leroy&quot;}]]}
 </code></pre>
 
-<h4> get_location: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location</h4>
-
-<h4> Ejemplo de URL: http://localhost:3000/api/locations/get_location/20/25/all </h4>
+<h4> get_location <br> 
+Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location <br>
+Ejemplo de URL: http://localhost:3000/api/locations/Sebas/get_location </h4>
 
 <pre class="code ruby"><code class="ruby">
 {&quot;location_point&quot;:[[{&quot;latitude&quot;:20.0,&quot;longitude&quot;:25.0,&quot;created_at&quot;:&quot;2013-04-04 21:06&quot;}]],&quot;code&quot;:&quot;000&quot;}
+</code></pre>
+
+<h4> get_all_categories <br> 
+Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/get_all_categories <br>
+Ejemplo de URL: http://localhost:3000/api/locations/get_all_categories </h4>
+
+<pre class="code ruby"><code class="ruby">
+{&quot;categories&quot;:[[{&quot;id&quot;:1,&quot;name&quot;:&quot;Comercio&quot;,&quot;description&quot;:null}],[{&quot;id&quot;:2,&quot;name&quot;:&quot;Instituto&quot;,&quot;description&quot;:null}],[{&quot;id&quot;:3,&quot;name&quot;:&quot;Taxi&quot;,&quot;description&quot;:null}]],&quot;code&quot;:&quot;000&quot;}
+</code></pre>
+
+<h4> get_all_types <br> 
+Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/get_all_types <br>
+Ejemplo de URL: http://localhost:3000/api/locations/get_all_types </h4>
+
+<pre class="code ruby"><code class="ruby">
+{&quot;tipes&quot;:[[{&quot;id&quot;:1,&quot;name&quot;:&quot;Supermercardo&quot;,&quot;dinamic&quot;:false,&quot;description&quot;:&quot;Superchinos&quot;}],[{&quot;id&quot;:2,&quot;name&quot;:&quot;Transporte&quot;,&quot;dinamic&quot;:true,&quot;description&quot;:&quot;Transporte publico&quot;}]],&quot;code&quot;:&quot;000&quot;}
 </code></pre>
 
   
@@ -347,7 +364,7 @@ curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E
 	</div>
     
     <div id="footer">
-  Generated on Sat Apr  6 12:27:23 2013 with ruby-1.9.3
+  Generated on Sat Apr  6 12:48:37 2013 with ruby-1.9.3
 </div>
 
   </body>

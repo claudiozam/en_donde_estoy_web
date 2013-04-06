@@ -1,30 +1,45 @@
 <h2> Ejemplos de curl para devices </h2>
 
-<h4> create:  curl -v -k -X POST -d "name=SebasDeviceHey&category_id=1&type_id=1" http://127.0.0.1:3000/api/devices/create </h4>
+<h4> create <br>
+Ejemplo de Curl: curl -v -k -X POST -d "name=SebasDeviceHey&category_id=1&type_id=1" http://127.0.0.1:3000/api/devices/create </h4>
 <pre>
 {"message":"Device was created successfuly.","code":"600"}
 </pre>
 
-
-
-<h4> update_location: curl -v -k -X PUT -d "latitude=20&longitude=25" http://127.0.0.1:3000/api/devices/1/update_location </h4>
+<h4> update_location <br>
+Ejemplo de Curl: curl -v -k -X PUT -d "latitude=20&longitude=25" http://127.0.0.1:3000/api/devices/1/update_location </h4>
 <pre>
 {"message":"Updated sucessfully.","code":"000"}
 </pre>
 
 
+
 <h2> Ejemplos de curl para Locations </h2>
 
-<h4> find_near_locations:
-curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all</h4>
-<h4> Ejemplo de URL: http://localhost:3000/api/locations/find_near_locations/20/25/all </h4>
+<h4> find_near_locations <br>
+Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30%2E5/21%2E5/all <br>
+Ejemplo de URL: http://localhost:3000/api/locations/find_near_locations/20/25/all </h4>
 <pre>
 {"code":"000","list":[[{"latitude":30.5,"longitude":21.5,"updated_at":"2013-04-04 14:03","category":"Comercio","device":"Sebas"}],[{"latitude":30.5,"longitude":21.5,"updated_at":"2013-04-04 14:06","category":"Instituto","device":"Leroy"}]]}
 </pre>
 
-
-<h4> get_location: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location</h4>
-<h4> Ejemplo de URL: http://localhost:3000/api/locations/Sebas/get_location </h4>
+<h4> get_location <br> 
+Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location <br>
+Ejemplo de URL: http://localhost:3000/api/locations/Sebas/get_location </h4>
 <pre>
 {"location_point":[[{"latitude":20.0,"longitude":25.0,"created_at":"2013-04-04 21:06"}]],"code":"000"}
+</pre>
+
+<h4> get_all_categories <br> 
+Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/get_all_categories <br>
+Ejemplo de URL: http://localhost:3000/api/locations/get_all_categories </h4>
+<pre>
+{"categories":[[{"id":1,"name":"Comercio","description":null}],[{"id":2,"name":"Instituto","description":null}],[{"id":3,"name":"Taxi","description":null}]],"code":"000"}
+</pre>
+
+<h4> get_all_types <br> 
+Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/get_all_types <br>
+Ejemplo de URL: http://localhost:3000/api/locations/get_all_types </h4>
+<pre>
+{"tipes":[[{"id":1,"name":"Supermercardo","dinamic":false,"description":"Superchinos"}],[{"id":2,"name":"Transporte","dinamic":true,"description":"Transporte publico"}]],"code":"000"}
 </pre>
