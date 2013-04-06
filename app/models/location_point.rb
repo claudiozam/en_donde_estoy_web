@@ -1,6 +1,7 @@
 class LocationPoint < ActiveRecord::Base
-  geocoded_by :address
+	geocoded_by :address
 	
+	belongs_to :device
 	belongs_to :location
 
 	attr_accessible :device_id, :latitude, :longitude

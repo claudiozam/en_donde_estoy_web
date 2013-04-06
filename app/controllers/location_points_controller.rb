@@ -1,6 +1,12 @@
 class LocationPointsController < ApplicationController
 
-
+  def near_location_points
+    lat = params[:lat]
+    lng = params[:lng]
+    #@location_points = LocationPoint.where(["created_at >= ? AND created_at <= ?", Time.now - 60, Time.now]).near([lat, lng], 5, :units => :km).limit(20)
+    @location_points = LocationPoint.near([lat, lng], 5, :units => :km).limit(20)
+    render json: @location_points
+  end
 
   # GET /location_points
   # GET /location_points.json
