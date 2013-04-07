@@ -11,18 +11,50 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220182932) do
+ActiveRecord::Schema.define(:version => 20130317211358) do
+
+  create_table "devices", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "location_id"
+  end
+
+  create_table "location_categories", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "location_points", :force => true do |t|
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
     t.integer  "device_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "location_id"
   end
 
   add_index "location_points", ["created_at"], :name => "index_location_points_on_created_at"
   add_index "location_points", ["latitude", "longitude"], :name => "index_location_points_on_latitude_and_longitude"
+
+  create_table "location_types", :force => true do |t|
+    t.string   "name"
+    t.boolean  "dinamic"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "locations", :force => true do |t|
+    t.integer  "location_type_id"
+    t.integer  "location_category_id"
+    t.integer  "current_location_point_id"
+    t.integer  "device_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
 
 end
