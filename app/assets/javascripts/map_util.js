@@ -28,11 +28,22 @@ MapUtils.configMap = function(mapId) {
 	    $('#' + mapId).css('height', (h - offsetTop));
 	}).resize();
 
+<<<<<<< HEAD
 	$('#buttonBuscar').click(function() {
 		$('#buttonOcultar').show();
 		$('#col_right').removeClass('span12')
 		$('#col_right').addClass('span10');
 		$(MapUtils.LocationPoints).insertBefore('#col_right');
+=======
+
+	$('#linkBuscar').click(function() {
+		
+		var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(-34.59707,-58.416501),
+            map: MapUtils.ActualMap,
+            title: 'Hello World!'
+        });
+>>>>>>> db487f93af1704bcd4dabaab21048466215477ba
 		MapUtils.getNearLocationPoints(-34.595381, -58.423716);
 		MapUtils.setNearLocationPointsMarkers(-34.595381, -58.423716);
 	});
