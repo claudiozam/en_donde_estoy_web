@@ -2,9 +2,9 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>
-  Documentation by YARD 0.8.5.2
+  Documentacion En donde estoy
   
 </title>
 
@@ -291,58 +291,30 @@
     
     <div id="content" style="padding-top: 12px;">
 		<div id="start">
-  <h1 class="noborder title">Documentation by YARD 0.8.5.2</h1>
+  <h1 class="noborder title">Documentacion En donde estoy</h1>
 
   
-	<h2> Ejemplos de curl para devices </h2>
+	<h1>Proyecto: ¿En dónde estoy?</h1>
 
-<h4> create <br>
-Ejemplo de Curl: curl -v -k -X POST -d "name=SebasDeviceHey&category_id=1&type_id=1" http://127.0.0.1:3000/api/devices/create </h4>
+<p>Introducción</p>
 
-<pre class="code ruby"><code class="ruby">
-{&quot;message&quot;:&quot;Device was created successfuly.&quot;,&quot;code&quot;:&quot;600&quot;}
-</code></pre>
+<p>Un Sistema de Información Geográfica (SIG o GIS, en su acrónimo inglés Geographic Information System) es una integración organizada de hardware, software y datos geográficos diseñada para capturar, almacenar, manipular, analizar y desplegar en todas sus formas la información geográficamente referenciada con el fin de resolver problemas complejos de planificación y gestión geográfica. También puede definirse como un modelo de una parte de la realidad referido a un sistema de coordenadas terrestre y construido para satisfacer unas necesidades concretas de información.</p>
 
-<h4> update_location <br>
-Ejemplo de Curl: curl -v -k -X PUT -d "latitude=20&longitude=25" http://127.0.0.1:3000/api/devices/1/update_location </h4>
+<p>Objetivo</p>
 
-<pre class="code ruby"><code class="ruby">
-{&quot;message&quot;:&quot;Updated sucessfully.&quot;,&quot;code&quot;:&quot;000&quot;}
-</code></pre>
+<p>El objetivo del proyecto es generar un sistema que permite la búsqueda de personas y vehículos mediante GPS utilizando teléfonos inteligentes Android y Google Maps.</p>
 
-<h2> Ejemplos de curl para Locations </h2>
+<p>Posibles aplicaciones</p>
 
-<h4> find_near_locations <br>
-Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/find_near_locations/30.5/21.5/all <br>
-Ejemplo de URL: http://localhost:3000/api/locations/find_near_locations/30.5/21.5/all </h4>
+<p>Sistema de búsqueda y despacho de taxis y/o remises
+Sistemas de localización de camiones de transporte.
+Buscador de personas (adolecentes, niños, etc).</p>
 
-<pre class="code ruby"><code class="ruby">
-{&quot;code&quot;:&quot;000&quot;,&quot;list&quot;:[[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:03&quot;,&quot;category&quot;:&quot;Comercio&quot;,&quot;device&quot;:&quot;Sebas&quot;}],[{&quot;latitude&quot;:30.5,&quot;longitude&quot;:21.5,&quot;updated_at&quot;:&quot;2013-04-04 14:06&quot;,&quot;category&quot;:&quot;Instituto&quot;,&quot;device&quot;:&quot;Leroy&quot;}]]}
-</code></pre>
+<p>Herramientas</p>
 
-<h4> get_location <br> 
-Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/Sebas/get_location <br>
-Ejemplo de URL: http://localhost:3000/api/locations/Sebas/get_location </h4>
-
-<pre class="code ruby"><code class="ruby">
-{&quot;location_point&quot;:[[{&quot;latitude&quot;:20.0,&quot;longitude&quot;:25.0,&quot;created_at&quot;:&quot;2013-04-04 21:06&quot;}]],&quot;code&quot;:&quot;000&quot;}
-</code></pre>
-
-<h4> get_all_categories <br> 
-Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/get_all_categories <br>
-Ejemplo de URL: http://localhost:3000/api/locations/get_all_categories </h4>
-
-<pre class="code ruby"><code class="ruby">
-{&quot;categories&quot;:[[{&quot;id&quot;:1,&quot;name&quot;:&quot;Comercio&quot;,&quot;description&quot;:null}],[{&quot;id&quot;:2,&quot;name&quot;:&quot;Instituto&quot;,&quot;description&quot;:null}],[{&quot;id&quot;:3,&quot;name&quot;:&quot;Taxi&quot;,&quot;description&quot;:null}]],&quot;code&quot;:&quot;000&quot;}
-</code></pre>
-
-<h4> get_all_types <br> 
-Ejemplo de Curl: curl -v -k -X GET  http://127.0.0.1:3000/api/locations/get_all_types <br>
-Ejemplo de URL: http://localhost:3000/api/locations/get_all_types </h4>
-
-<pre class="code ruby"><code class="ruby">
-{&quot;tipes&quot;:[[{&quot;id&quot;:1,&quot;name&quot;:&quot;Supermercardo&quot;,&quot;dinamic&quot;:false,&quot;description&quot;:&quot;Superchinos&quot;}],[{&quot;id&quot;:2,&quot;name&quot;:&quot;Transporte&quot;,&quot;dinamic&quot;:true,&quot;description&quot;:&quot;Transporte publico&quot;}]],&quot;code&quot;:&quot;000&quot;}
-</code></pre>
+<p>Lenguaje de programación: Ruby on Rails
+Plataforma Móvil: Google Android
+Mecanismo de integración entre sistemas: Api REST</p>
 
   
   
@@ -364,7 +336,7 @@ Ejemplo de URL: http://localhost:3000/api/locations/get_all_types </h4>
 	</div>
     
     <div id="footer">
-  Generated on Sat Apr  6 15:03:36 2013 with ruby-1.9.3
+  Generated on Sun Apr 14 17:34:32 2013 with ruby-1.9.3
 </div>
 
   </body>

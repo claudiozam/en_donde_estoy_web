@@ -25,6 +25,10 @@ class Api::LocationsController < ApplicationController
   #      <li><strong>601</strong> No se pasaron longitud o latitud en la url. </li>
   #      <li><strong>999</strong> ERROR </li>
   #   </ul>
+  # @example_request 
+  #   $.ajax({ type: 'GET', url: "/api/locations/find_near_locations/30.5/21.5/all" })
+  # @example_response 
+  #   {"code":"000","list":[[{"latitude":30.5,"longitude":21.5,"updated_at":"2013-04-04 14:03","category":"Comercio","device":"Sebas"}],[{"latitude":30.5,"longitude":21.5,"updated_at":"2013-04-04 14:06","category":"Instituto","device":"Leroy"}]]}
   #
   def find_near_locations
     if params[:latitude].blank? or params[:longitude].blank?
@@ -76,22 +80,28 @@ class Api::LocationsController < ApplicationController
   #      <li><strong>601</strong> No se paso nombre del device o el mismo es "blanco".</li>
   #      <li><strong>999</strong> ERROR</li>
   #   </ul>
+  # @example_request 
+  #   $.ajax({ type: 'GET', url: "/api/locations/XuanJuan/get_location" })
+  # @example_response 
+  #   {"location_point":[[{"latitude":25.5,"longitude":35.0,"created_at":"2013-04-14 20:08"}]],"code":"000"}
   #
   def get_location
     if params[:device_name].blank?
       response = { :message => "Please, make sure to send the device_name to search.", :code => "601" }
     else
       location = Location.with_device_name(params[:device_name])
-      location_point = location.first.current_location_point
-      result = []
-      result << [ :latitude => location_point.latitude,
-                  :longitude => location_point.longitude,
-                  :created_at => I18n.l( location_point.created_at,:format => :long) ]
-      response = { :location_point => result, :code => "000" }
+      if location.empty?
+        response = { :message => 'Could not find device.', :code => "405" } 
+      else
+        location_point = location.first.current_location_point
+        result = []
+        result << [ :latitude => location_point.latitude,
+                    :longitude => location_point.longitude,
+                    :created_at => I18n.l( location_point.created_at,:format => :long) ]
+        response = { :location_point => result, :code => "000" }
+      end
     end
     render json: response
-  rescue ActiveRecord::RecordNotFound
-    render json: { :message => 'Could not find device.', :code => "405" }  
   rescue Exception => e
     render json: { :message => "There was an error while processing this request. #{e}", :code => "999" }
   end
@@ -113,6 +123,10 @@ class Api::LocationsController < ApplicationController
   #      <li><strong>000</strong> SUCCESS </li>
   #      <li><strong>999</strong> ERROR</li>
   #   </ul>
+  # @example_request 
+  #   $.ajax({ type: 'GET', url: "/api/locations/get_all_categories" })
+  # @example_response 
+  #   {"categories":[[{"id":1,"name":"personal","description":null}],[{"id":2,"name":"comercio","description":null}],[{"id":3,"name":"instituto","description":null}],[{"id":4,"name":"taxi","description":null}],[{"id":5,"name":"colectivo","description":null}]],"code":"000"}
   #
   def get_all_categories
     location_categories = LocationCategory.all
@@ -134,7 +148,7 @@ class Api::LocationsController < ApplicationController
   # @resource /api/locations/get_all_types
   # @action GET
   #
-  # @response_field [array] tipes Lista de hashes con los datos de cada categoria.
+  # @response_field [array] types Lista de hashes con los datos de cada categoria.
   #   <ul>
   #      <li><strong>id</strong> Id del tipo de location (valor integer).
   #      <li><strong>nombre</strong> Nombre del tipo de location.
@@ -146,6 +160,10 @@ class Api::LocationsController < ApplicationController
   #      <li><strong>000</strong> SUCCESS </li>
   #      <li><strong>999</strong> ERROR</li>
   #   </ul>
+  # @example_request 
+  #   $.ajax({ type: 'GET', url: "/api/locations/get_all_types" })
+  # @example_response 
+  #   {"types":[[{"id":1,"name":"Supermercardo","dinamic":false,"description":"Superchinos"}],[{"id":2,"name":"Transporte","dinamic":true,"description":"Transporte publico"}]],"code":"000"}
   #
   def get_all_types
     location_types = LocationType.all
@@ -156,7 +174,7 @@ class Api::LocationsController < ApplicationController
                 :dinamic => type.dinamic,
                 :description => type.description ]
     end
-    response = { :tipes => result, :code => "000" }
+    response = { :types => result, :code => "000" }
     render json: response
   rescue Exception => e
     render json: { :message => "There was an error while processing this request. #{e}", :code => "999" }

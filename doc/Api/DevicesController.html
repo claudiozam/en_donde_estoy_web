@@ -6,7 +6,7 @@
 <title>
   Class: Api::DevicesController
   
-    &mdash; Documentation by YARD 0.8.5.2
+    &mdash; Documentacion En donde estoy
   
 </title>
 
@@ -293,7 +293,7 @@
     
     <div id="content" style="padding-top: 12px;">
 		<div class="service">
-  <h1 class="noborder title">Documentation by YARD 0.8.5.2</h1>
+  <h1 class="noborder title">Documentacion En donde estoy</h1>
     <a class="back" href="../index.html" title="back to the overview">&laquo; back to overview</a>
     <h2>Devices</h2>
     
@@ -336,6 +336,19 @@
 				
 
 				
+					<div class="optional">
+						<h4>Optional Parameters</h4>
+						
+							<ul>
+								<li>
+									<span class="name">description</span>
+									<span class="type">text</span>
+									<span class="text">Descripcion del device.</span>
+								</li>
+							</ul>
+						
+					</div>
+				
 			</div><!-- parameters -->
 			
 			
@@ -368,6 +381,39 @@
 				</div>
 			
 			
+			
+				<div class="examples">
+					<h4>Examples</h4>
+					
+						<div class="example">
+							
+							
+							
+							<span class="description">
+								
+							</span>
+							<span class="hash request">
+								<strong class="type">Request</strong>
+								
+									
+										$.ajax({ type: 'POST', url: "/api/devices/create", data: {name: "Garrahan", description: "Hospital de ninios", category_id: 1, type_id: 1} })
+									
+								
+							</span>
+							<span class="hash response">
+								<strong class="type">Response</strong>
+								
+									
+										{"message":"Device was created successfuly.","code":"600"}
+									
+								
+							</span>
+							<span class="description">
+								
+							</span>
+						</div>
+					
+				</div>
 			
 		</div>	
     
@@ -440,6 +486,39 @@
 			
 			
 			
+				<div class="examples">
+					<h4>Examples</h4>
+					
+						<div class="example">
+							
+							
+							
+							<span class="description">
+								
+							</span>
+							<span class="hash request">
+								<strong class="type">Request</strong>
+								
+									
+										$.ajax({ type: 'PUT', url: "/api/devices/1/update_location", data: { latitude: 25.5, longitude: 35 } })
+									
+								
+							</span>
+							<span class="hash response">
+								<strong class="type">Response</strong>
+								
+									
+										{"message":"Updated sucessfully.","code":"000"}
+									
+								
+							</span>
+							<span class="description">
+								
+							</span>
+						</div>
+					
+				</div>
+			
 		</div>	
     
   </div>
@@ -461,7 +540,7 @@
 	</div>
     
     <div id="footer">
-  Generated on Sat Apr  6 15:03:36 2013 with ruby-1.9.3
+  Generated on Sun Apr 14 17:34:32 2013 with ruby-1.9.3
 </div>
 
   </body>

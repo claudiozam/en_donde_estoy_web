@@ -1,5 +1,4 @@
 class Api::DevicesController < ApplicationController
-
 	##
   # Crea un dispositivo nuevo. 
   #
@@ -9,6 +8,7 @@ class Api::DevicesController < ApplicationController
   # @required [string] name Nombre del dispositivo.
   # @required [integer] category_id 
   # @required [integer] type_id 
+  # @optional [text] description Descripcion del device. 
   #
   # @response_field [string] message String con el resultado del metodo.
   # @response_field [string] code numero que representa el resultado del request. 
@@ -19,12 +19,16 @@ class Api::DevicesController < ApplicationController
   #      <li><strong>603</strong> Parametros incorrectos. </li>
   #      <li><strong>999</strong> ERROR </li>
   #   </ul>
+  # @example_request 
+  #   $.ajax({ type: 'POST', url: "/api/devices/create", data: {name: "Garrahan", description: "Hospital de ninios", category_id: 1, type_id: 1} })
+  # @example_response 
+  #   {"message":"Device was created successfuly.","code":"600"}
   #
   def create
     if params[:name].blank? or params[:category_id].blank? or params[:type_id].blank?
       response = { :code => "603", :message => "Please, check data you are sending. There is data mising." }    
     else
-      device = Device.new :name => params[:name]    
+      device = Device.new :name => params[:name], :description => (params[:description].nil? ? "" : params[:description])
       if device.valid?
         location = Location.new
         location.location_category = LocationCategory.find(params[:category_id])
@@ -61,6 +65,10 @@ class Api::DevicesController < ApplicationController
   #      <li><strong>603</strong> Faltan parametros. </li>
   #      <li><strong>999</strong> ERROR </li>
   #   </ul>
+  # @example_request 
+  #   $.ajax({ type: 'PUT', url: "/api/devices/1/update_location", data: { latitude: 25.5, longitude: 35 } })
+  # @example_response 
+  #   {"message":"Updated sucessfully.","code":"000"}
   #
   def update_location
     if params[:latitude].blank? or params[:longitude].blank?
@@ -81,4 +89,4 @@ class Api::DevicesController < ApplicationController
   rescue Exception => e
     render json: { :message => 'There was an error while trying to update this location.', :code => "999" }
   end  
-  end
+end
