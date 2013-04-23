@@ -8,7 +8,7 @@ EnDondeEstoy::Application.routes.draw do
     match '/locations/get_all_categories' => 'locations#get_all_categories', :as => 'get_all_categories', :via => [:get]
     match '/locations/get_all_types' => 'locations#get_all_types', :as => 'get_all_types', :via => [:get]
     match '/devices/create' => 'devices#create', :as => 'create', :via => [:post]
-    match '/devices/:id/update_location' => 'devices#update_location', :as => 'update_location', :via => [:put]
+    match '/devices/:id/update_location' => 'devices#update_location', :as => 'update_location', :via => [:post]
   end
   
   resources :location_points do
