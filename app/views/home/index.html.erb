@@ -2,8 +2,10 @@
 
 <% content_for :scripts do %>
 	<script type="text/javascript">
-		$(function() { 
-			MapUtils.configMap('general_map');
+		$(function() {
+			$('#buttonOcultar').hide();
+			MapUtils.getLocation();
+//			MapUtils.configMap('general_map');
 		});
 	</script>
 <% end %>
@@ -13,9 +15,10 @@
 <!--		<div id="map_filters">Bucador para el mapa... <a href="#" id="linkTest">Test</a> </div> -->
 		<div id="map_filters">
 			<form class="form-inline">
-				<label class="control-label" for="selectedCategoria">Categoria: </label>
+				<label class="control-label" for="search_location_category_id">Categoria: </label>
     			<%= select("search", "location_category_id", LocationCategory.all.collect {|p| [ p.name, p.id ] }, {:include_blank => ''}) %>
-				<label class="control-label" for="selectedTipo">Tipo: </label>
+				<label class="control-label" for="search_location_type_id">Tipo: </label>
+    			<%= select("search", "location_type_id", LocationType.all.collect {|p| [ p.name, p.id ] }, {:include_blank => ''}) %>
 				<label class="control-label" for="inputTexto">Texto: </label>
     			<input type="text" class="input-large" id="inputTexto" placeholder="Ingrese el texto deseado">
 				<label class="control-label" for="selectedKM">KM> </label>
