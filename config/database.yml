@@ -12,6 +12,6 @@ production:
   encoding: utf8
   database: en_donde_estoy_development
   username: root
-  password: hql
+  password: 
   pool: 5
   host: localhost

@@ -17,6 +17,7 @@ class Api::LocationsController < ApplicationController
   #      <li><strong>updated_at</strong> Fecha de creacion del mismo. El formato del mismo es "%Y-%m-%d %H:%M" (Eg: 2013-03-24 18:06:29)
   #      <li><strong>category</strong> Nombre de la categoria a la que pertenece. 
   #      <li><strong>device</strong> Nombre el dispositivo.
+  #      <li><strong>device_description</strong> Texto con la descripcion del dispositivo. 
   #   </ul>
   # @response_field [string] code numero que representa el resultado del request. 
   #   <ul>
@@ -28,7 +29,7 @@ class Api::LocationsController < ApplicationController
   # @example_request 
   #   $.ajax({ type: 'GET', url: "/api/locations/find_near_locations/30.5/21.5/all" })
   # @example_response 
-  #   {"code":"000","list":[[{"latitude":30.5,"longitude":21.5,"updated_at":"2013-04-04 14:03","category":"Comercio","device":"Sebas"}],[{"latitude":30.5,"longitude":21.5,"updated_at":"2013-04-04 14:06","category":"Instituto","device":"Leroy"}]]}
+  #   {"code":"000","list":[{"latitude":25.158,"longitude":30.588,"updated_at":"2013-04-14 19:18","category":"taxi","device":"Taxi_157","device_description":"taxi con id 157"},{"latitude":25.5,"longitude":35.0,"updated_at":"2013-04-14 20:08","category":"personal","device":"XuanJuan","device_description":"Abierto de 9hs a 21hs"}]}
   #
   def find_near_locations
     if params[:latitude].blank? or params[:longitude].blank?
@@ -45,11 +46,12 @@ class Api::LocationsController < ApplicationController
         locations_ids.each do |ids|
           location = Location.find ids
           current_location_point = location.current_location_point
-          result << [ :latitude => current_location_point.latitude,
+          result << { :latitude => current_location_point.latitude,
                       :longitude => current_location_point.longitude,
                       :updated_at => I18n.l( current_location_point.created_at,:format => :long), 
                       :category => location.location_category.name,
-                      :device => location.device.name ]
+                      :device => location.device.name,
+                      :device_description => location.device.description }
         end
         response = { :code => "000", :list => result }    
       end  
@@ -83,7 +85,7 @@ class Api::LocationsController < ApplicationController
   # @example_request 
   #   $.ajax({ type: 'GET', url: "/api/locations/XuanJuan/get_location" })
   # @example_response 
-  #   {"location_point":[[{"latitude":25.5,"longitude":35.0,"created_at":"2013-04-14 20:08"}]],"code":"000"}
+  #   "{"location_point":[{"latitude":25.5,"longitude":35.0,"created_at":"2013-04-14 20:08"}],"code":"000"}"
   #
   def get_location
     if params[:device_name].blank?
@@ -95,9 +97,9 @@ class Api::LocationsController < ApplicationController
       else
         location_point = location.first.current_location_point
         result = []
-        result << [ :latitude => location_point.latitude,
+        result << { :latitude => location_point.latitude,
                     :longitude => location_point.longitude,
-                    :created_at => I18n.l( location_point.created_at,:format => :long) ]
+                    :created_at => I18n.l( location_point.created_at,:format => :long) }
         response = { :location_point => result, :code => "000" }
       end
     end
@@ -126,15 +128,15 @@ class Api::LocationsController < ApplicationController
   # @example_request 
   #   $.ajax({ type: 'GET', url: "/api/locations/get_all_categories" })
   # @example_response 
-  #   {"categories":[[{"id":1,"name":"personal","description":null}],[{"id":2,"name":"comercio","description":null}],[{"id":3,"name":"instituto","description":null}],[{"id":4,"name":"taxi","description":null}],[{"id":5,"name":"colectivo","description":null}]],"code":"000"}
+  #   "{"categories":[{"id":1,"name":"personal","description":null},{"id":2,"name":"comercio","description":null},{"id":3,"name":"instituto","description":null},{"id":4,"name":"taxi","description":null},{"id":5,"name":"colectivo","description":null}],"code":"000"}"
   #
   def get_all_categories
     location_categories = LocationCategory.all
     result = []
     location_categories.each do |category|
-    result << [ :id => category.id,
+    result << { :id => category.id,
                 :name => category.name,
-                :description => category.description ]
+                :description => category.description }
     end
     response = { :categories => result, :code => "000" }
     render json: response
@@ -163,16 +165,16 @@ class Api::LocationsController < ApplicationController
   # @example_request 
   #   $.ajax({ type: 'GET', url: "/api/locations/get_all_types" })
   # @example_response 
-  #   {"types":[[{"id":1,"name":"Supermercardo","dinamic":false,"description":"Superchinos"}],[{"id":2,"name":"Transporte","dinamic":true,"description":"Transporte publico"}]],"code":"000"}
+  #   "{"types":[{"id":1,"name":"establecimiento","dinamic":false,"description":null},{"id":2,"name":"movil","dinamic":false,"description":null},{"id":3,"name":"transporte","dinamic":true,"description":null}],"code":"000"}"
   #
   def get_all_types
     location_types = LocationType.all
     result = []
     location_types.each do |type|
-    result << [ :id => type.id,
+    result << { :id => type.id,
                 :name => type.name,
                 :dinamic => type.dinamic,
-                :description => type.description ]
+                :description => type.description }
     end
     response = { :types => result, :code => "000" }
     render json: response
