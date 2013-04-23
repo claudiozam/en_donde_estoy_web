@@ -13,6 +13,7 @@ gem "twitter-bootstrap-rails", "~> 2.2.4"
 gem "less-rails"
 gem 'therubyracer'
 gem 'execjs'
+gem 'thin'
 gem "jquery-tmpl-rails"
 
 

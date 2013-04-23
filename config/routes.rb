@@ -3,7 +3,7 @@ EnDondeEstoy::Application.routes.draw do
   end
   
   namespace :api do
-    match '/locations/find_near_locations/:latitude/:longitude/:category_name' => 'locations#find_near_locations', :as => 'find_near_locations', :via => [:get], :latitude => /[\w.]+/, :longitude => /[\w.]+/
+    match '/locations/find_near_locations/:latitude/:longitude/:category_name' => 'locations#find_near_locations', :as => 'find_near_locations', :via => [:get], :latitude => /[\w.-]+/, :longitude => /[\w.-]+/
     match '/locations/:device_name/get_location' => 'locations#get_location', :as => 'get_location', :via => [:get]
     match '/locations/get_all_categories' => 'locations#get_all_categories', :as => 'get_all_categories', :via => [:get]
     match '/locations/get_all_types' => 'locations#get_all_types', :as => 'get_all_types', :via => [:get]
