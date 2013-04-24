@@ -46,7 +46,9 @@ class Api::LocationsController < ApplicationController
         locations_ids.each do |ids|
           location = Location.find ids
           current_location_point = location.current_location_point
-          result << { :latitude => current_location_point.latitude,
+          result << { 
+                      :id => current_location_point.id,
+                      :latitude => current_location_point.latitude,
                       :longitude => current_location_point.longitude,
                       :updated_at => I18n.l( current_location_point.created_at,:format => :long), 
                       :category => location.location_category.name,

@@ -74,7 +74,8 @@ class Api::DevicesController < ApplicationController
     if params[:latitude].blank? or params[:longitude].blank?
       render json: { :code => "603", :message => "Please, check data you are sending. There are missing params." }    
     else
-      device = Device.find params[:id]
+      device = Device.where(:name => params[:id]).first
+       
       location = device.location
       location_point = LocationPoint.new :latitude => params[:latitude], :longitude => params[:longitude]
       location_point.location = location
