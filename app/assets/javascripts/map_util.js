@@ -71,7 +71,7 @@ MapUtils.cleanMarkers = function(){
 
 	if(MapUtils.MarkersArray.length !== 0){
 		for(var i = 0; i < MapUtils.MarkersArray.length; i++){
-			MapUtils.MarkersArray[i].setMap(null);
+			MapUtils.MarkersArray[i].marker.setMap(null);
 		}
 	}
 	MapUtils.MarkersArray = [];
@@ -87,10 +87,12 @@ MapUtils.setNearLocationPointsMarkers = function() {
 };
 
 MapUtils.findPointMarkerById = function(id) {
+	var MarkerAndPos;
 	if(MapUtils.Points.length !== 0){
 		for(var i = 0; i < MapUtils.Points.length; i++){
 			if (MapUtils.Points[i].id==id){
-				return MapUtils.Points[i];
+				MarkerAndPos = { m: MapUtils.Points[i], p: i };
+				return MarkerAndPos;
 			}
 		}
 	}
@@ -101,31 +103,35 @@ MapUtils.setSingleMarker = function(MData, M_id, add) {
 	var latLng, marker, dataListener, MapsEventListener;
 	if(add){
 		MarkerData = MData;
+		latLng = new google.maps.LatLng(MarkerData.latitude, MarkerData.longitude);
+		marker = new google.maps.Marker({
+   			position: latLng,
+   			map: MapUtils.ActualMap,
+   			title: 'Dev tipo: ' + MarkerData.device_id
+		});
+		dataListener = 'id: ' + MarkerData.id + '<br>device_id: ' + MarkerData.device_id + '<br>latitud: ' 
+			+ MarkerData.latitude + '<br>longitud: ' + MarkerData.longitude + '<br>Diferente solo para ver que se puede';
+		MapsEventListener = google.maps.event.addListener(marker, 'click', (function(marker, dataListener) {
+			return function() {
+				MapUtils.InfoWindow.setContent(dataListener);
+				MapUtils.InfoWindow.open(MapUtils.ActualMap, marker);
+			}
+		})(marker, dataListener));
+		MapUtils.MarkersArray.push({ marker: marker, latLng: latLng, dataListener: dataListener });
+		MapUtils.MarkersEventListenerArray.push(MapsEventListener);
 	} else {
-		MarkerData = MapUtils.findPointMarkerById(M_id);
-		MapUtils.cleanMarkers();
-	}
-	latLng = new google.maps.LatLng(MarkerData.latitude, MarkerData.longitude);
-	marker = new google.maps.Marker({
-   		position: latLng,
-   		map: MapUtils.ActualMap,
-   		title: 'Dev tipo: ' + MarkerData.device_id
-	});
-	dataListener = 'id: ' + MarkerData.id + '<br>device_id: ' + MarkerData.device_id + '<br>latitud: ' 
-		+ MarkerData.latitude + '<br>longitud: ' + MarkerData.longitude;
-	MapsEventListener = google.maps.event.addListener(marker, 'click', (function(marker, dataListener) {
-		return function() {
+		if (MarkerData!=null) {
+			MarkerData = MapUtils.findPointMarkerById(M_id);
+			$('#tmplVarInfoWindow').empty();
+			$.tmpl('temp_InfoWindow', MarkerData.m).appendTo('#tmplVarInfoWindow');
+			dataListener = $("#tmplVarInfoWindow").html();
+			MapUtils.ActualMap.setCenter(MapUtils.MarkersArray[MarkerData.p].latLng);
+//		MapUtils.InfoWindow.setContent(MapUtils.MarkersArray[MarkerData.p].dataListener);
+//		los dataListener son diferentes para experimentar, despues vemos cual dejamos
 			MapUtils.InfoWindow.setContent(dataListener);
-			MapUtils.InfoWindow.open(MapUtils.ActualMap, marker);
+			MapUtils.InfoWindow.open(MapUtils.ActualMap, MapUtils.MarkersArray[MarkerData.p].marker);
 		}
-	})(marker, dataListener));
-	if(!add){
-		MapUtils.ActualMap.setCenter(latLng);
-		MapUtils.InfoWindow.setContent(dataListener);
-		MapUtils.InfoWindow.open(MapUtils.ActualMap, marker);
 	}
-	MapUtils.MarkersArray.push(marker);
-	MapUtils.MarkersEventListenerArray.push(MapsEventListener);
 };
 
 MapUtils.ustedEstaAqui = function(MarkerData) {
@@ -176,10 +182,9 @@ MapUtils.showError = function(error) {
 			message='Geolocalización no disponible en el tiempo requerido.';
 			break;
 	case error.UNKNOWN_ERROR:
-			message='Se producido un error de geolocalización.';
+			message='Se ha producido un error de geolocalización.';
 			break;
 	}
 	MapUtils.Position.lat='error';
 	$("#general_map").html('<h3>' + message + '</h3>');
 };
-
