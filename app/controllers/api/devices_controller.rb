@@ -75,10 +75,11 @@ class Api::DevicesController < ApplicationController
       render json: { :code => "603", :message => "Please, check data you are sending. There are missing params." }    
     else
       device = Device.where(:name => params[:id]).first
-       
+
       location = device.location
       location_point = LocationPoint.new :latitude => params[:latitude], :longitude => params[:longitude]
       location_point.location = location
+      location_point.device = device
       location_point.save
       location.current_location_point = location_point
       location.save

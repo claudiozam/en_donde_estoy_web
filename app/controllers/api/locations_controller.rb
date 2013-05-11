@@ -50,10 +50,10 @@ class Api::LocationsController < ApplicationController
                       :id => current_location_point.id,
                       :latitude => current_location_point.latitude,
                       :longitude => current_location_point.longitude,
-                      :updated_at => I18n.l( current_location_point.created_at,:format => :long), 
-                      :category => location.location_category.name,
-                      :device => location.device.name,
-                      :device_description => location.device.description }
+                      :updated_at => (I18n.l( current_location_point.created_at,:format => :long) rescue ""), 
+                      :category => (location.location_category.name rescue ""),
+                      :device => (location.device.name rescue ""),
+                      :device_description => (location.device.description rescue "") }
         end
         response = { :code => "000", :list => result }    
       end  
