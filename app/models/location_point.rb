@@ -11,6 +11,7 @@ class LocationPoint < ActiveRecord::Base
 	
 	scope :is_current, where("current_location_id IS NOT NULL")
 	scope :near_location, lambda{ |latitude, longitude| LocationPoint.near([latitude, longitude], 5, :units => :km) }
+	scope :near_location_by_km, lambda{ |latitude, longitude, km| LocationPoint.near([latitude, longitude], km, :units => :km) }
 	
 	def get_address
 		results = Geocoder.search([latitude, longitude].join(','))

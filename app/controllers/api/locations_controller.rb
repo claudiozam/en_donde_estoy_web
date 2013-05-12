@@ -63,6 +63,36 @@ class Api::LocationsController < ApplicationController
     render json: { :message => "There was an error while processing this request. #{e}", :code => "999" }
   end
 
+  def find_locations
+      
+    location_points = LocationPoint.includes([:device, :location]).limit(params[:limit])
+    #location_points = location_points.near_location_by_km(params[:latitude],params[:longitude], params[:km]) if !params[:latitude].blank? && !params[:longitude].blank?  && !params[:km].blank?
+    location_points = location_points.where(["locations.location_category_id = ?", params[:category_id]]) if !params[:category_id].blank? && params[:category_id] != 0
+    location_points = location_points.where(["devices.description like ?", "%#{params[:device_description]}%"]) if !params[:device_description].blank?
+    
+    if location_points.count == 0
+      response = { :code => "600", :message => "There were no near location with those" } 
+    else
+      result = []
+      location_points.each do |location_point|
+        location = location_point.location
+        result << { 
+                    :id => (location_point.id rescue 0),
+                    :latitude => (location_point.latitude rescue 0),
+                    :longitude => (location_point.longitude rescue 0),
+                    :updated_at => (I18n.l( location_point.created_at,:format => :long) rescue ""), 
+                    :category => (location.location_category.name rescue ""),
+                    :device => (location.device.name rescue ""),
+                    :device_description => (location.device.description rescue "") }
+      end
+      response = { :code => "000", :list => result }    
+    end  
+  
+    render json: response
+  rescue Exception => e
+    render json: { :message => "There was an error while processing this request. #{e}", :code => "999" }
+  end
+
   ##
   # Obtiene el ultimo location_point del dispositivo que se desea buscar. 
   #

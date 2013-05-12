@@ -35,6 +35,7 @@ MapUtils.configMap = function(mapId) {
 	}).resize();
 
 	$('#buttonBuscar').click(function() {
+		//MapUtils.findLocations();
 		$('#buttonOcultar').show();
 		$('#col_right').removeClass('span12')
 		$('#col_right').addClass('span10');
@@ -59,6 +60,20 @@ MapUtils.getNearLocationPoints = function(currentLat, currentLng) {
 		MapUtils.setNearLocationPointsMarkers();
 	});
 };
+
+MapUtils.findLocations = function() {
+
+	$.post('/api/locations/find_locations', { category_id: 0, device_description: '', latitude: MapUtils.Position.lat, longitude: MapUtils.Position.lng, km: 30}, function(locations) {
+		
+		alert('ok');
+		//MapUtils.Points = points;
+		//$('#map_filters_result').empty();
+		//$.tmpl('temp_location_point_item', points).appendTo('#map_filters_result');
+		//MapUtils.setNearLocationPointsMarkers();
+	},'json');
+};
+
+
 
 MapUtils.cleanMarkers = function(){
 
